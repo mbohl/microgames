@@ -57,6 +57,9 @@ Microgames::Application.routes.draw do
    match "/signup",  :to => "users#new"
    match "/users/:id", :to => "users#show", :as => :home
 
+   #GAME PATHS
+   match "/creategame/:friend_id", :to => "games#create", :as => :create_game
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

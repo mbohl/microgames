@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<h1><b>WELCOME TO YOUR HOME PAGE <%= @user.first_name %>!</b></h1>
+<b>Yes it's very boring for now...</b>
 
 <p>
   <b>First Name:</b>
@@ -12,4 +14,15 @@
 <p>
   <b>Email:</b>
   <%= @user.email %>
+</p>
+
+<p>
+	<b>Friends</b>(Click "Invite to Game" to start game with user):
+	</br>
+	<!--this is all users for now...set up friends lists relationships later-->
+	<% @friends.each do |friend| %>
+		<%= friend.first_name + " " + friend.last_name + " "%>
+		<%= link_to "Invite to Game", create_game_path(friend.id) %>
+		<br>
+	<% end %>
 </p>
