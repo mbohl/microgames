@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :first_name, :last_name, :email, :password
+
+  #map for games_users
+  has_many :games_users
+  has_many :games, :through => :games_users
 
   def self.find_friends(user_id)
 

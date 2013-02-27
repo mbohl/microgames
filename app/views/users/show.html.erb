@@ -17,12 +17,14 @@
 </p>
 
 <p>
+	<%= link_to "Create Game", create_game_path %>
+
+<p>
 	<b>Friends</b>(Click "Invite to Game" to start game with user):
 	</br>
 	<!--this is all users for now...set up friends lists relationships later-->
 	<% @friends.each do |friend| %>
 		<%= friend.first_name + " " + friend.last_name + " "%>
-		<%= link_to "Invite to Game", create_game_path(friend.id) %>
 		<br>
 	<% end %>
 </p>

@@ -1,0 +1,7 @@
+Change Log
+
+2/25/2013:
+-Allow user to log in based on users currently in database
+-Allow users to view homepage, with friends list (currently, friends list is just everyone else registered on the database; will implement user-specific friends list later)
+-Allow users to create games with users on their friends lists (currently, no support for more than 2-player games yet)
+	-Creates entry in games table and 2 relational entries in games_users table

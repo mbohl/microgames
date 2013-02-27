@@ -3,6 +3,11 @@ class GamesController < ApplicationController
 
 	def new
 		@game = Game.new
+		@friends = User.find_friends(session[:user_id])
+		respond_to do |format|
+			format.html #new.html.erb
+			format.json { render :json => @game}
+		end
 	end
 
 	def create
@@ -11,10 +16,16 @@ class GamesController < ApplicationController
 	@game.type = 1
 	@game.turn = session[:user_id]
 	@game.last_turn = Time.now
+	@game.state = '000000000'
 
 	@player_ids = Array.new
 	@player_ids.push(session[:user_id])
-	@player_ids.push(params[:friend_id])
+
+	params.each do |cur_param|
+		if cur_param[0].starts_with? 'friend'
+			@player_ids.push(cur_param[0].split('.')[1])
+		end
+	end
 
 	if @game.save
 	#eventually change to association based entity creation

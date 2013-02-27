@@ -1,0 +1,12 @@
+User Stories and Scenarios
+
+-User wants to log in to check games in progress to see if it is their turn
+	-Requires screen showing status of each game in terms of if it's their move
+		-Requires "turn" variable in table for easy access to see whose turn it is (probably display "IT'S YOUR TURN!", on homepage for now)
+
+-User wants to log in, and start a new game with their friend
+	-Requires screen showing what kind of games user can create and who they can create them with
+		-Game views: new.html.erb
+			-list of friends to start game with
+			-list of games to start session for
+			-Confirm should call game.new and games_user.new via GameLogic module

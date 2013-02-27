@@ -58,7 +58,8 @@ Microgames::Application.routes.draw do
    match "/users/:id", :to => "users#show", :as => :home
 
    #GAME PATHS
-   match "/creategame/:friend_id", :to => "games#create", :as => :create_game
+   match "/creategame", :to => "games#new", :as => :create_game
+   post "/games", :to => "games#create"
 
   # See how all your routes lay out with "rake routes"
 
