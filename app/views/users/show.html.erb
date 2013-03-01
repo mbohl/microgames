@@ -20,7 +20,7 @@
 	<%= link_to "Create Game", create_game_path %>
 
 <p>
-	<b>Friends</b>(Click "Invite to Game" to start game with user):
+	<b>Friends</b>
 	</br>
 	<!--this is all users for now...set up friends lists relationships later-->
 	<% @friends.each do |friend| %>
@@ -28,3 +28,15 @@
 		<br>
 	<% end %>
 </p>
+
+<p>
+	<b>Current Games</b>
+	</br>
+	<% @usersGames.each do |g| %>
+		Game ID: <%= g.id %>
+		<% if g.turn == @user.id %>
+			<%= link_to "Your Turn!", "#" %>
+		<% end %>
+	</br>
+	<% end %>
+	</br>

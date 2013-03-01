@@ -11,25 +11,25 @@ class GamesController < ApplicationController
 	end
 
 	def create
-	#Set entry vaues 
-	@game = Game.new
-	@game.type = 1
-	@game.turn = session[:user_id]
-	@game.last_turn = Time.now
-	@game.state = '000000000'
+		#Set entry vaues 
+		@game = Game.new
+		@game.gametype = 1
+		@game.turn = session[:user_id]
+		@game.last_turn = Time.now
+		@game.state = '000000000'
 
-	@player_ids = Array.new
-	@player_ids.push(session[:user_id])
+		player_ids = Array.new
+		player_ids.push(session[:user_id])
 
-	params.each do |cur_param|
-		if cur_param[0].starts_with? 'friend'
-			@player_ids.push(cur_param[0].split('.')[1])
+		params.each do |cur_param|
+			if cur_param[0].starts_with? 'friend'
+				player_ids.push(cur_param[0].split('.')[1])
+			end
 		end
-	end
 
 	if @game.save
 	#eventually change to association based entity creation
-		GameLogic.create_new_game(@player_ids, @game.id)
+		GameLogic.create_games_users(player_ids, @game.id)
 	else
 	#error
 	end
