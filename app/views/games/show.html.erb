@@ -1,0 +1,39 @@
+<h1><%= GameLogic.get_game_name(@game.gametype.to_s) + " " + "Session:" + @game.id.to_s %> </h1>
+
+
+<!--For now, this is hardcoded for tic-tac-toe.  But we can put into partial templates that will render depending on value of @game.gametype.to_s when we have more games-->
+<table border='1'>
+	<tr>
+		<% for i in 0..2 %>
+			<td>
+				<% if @game.turn == session[:user_id] %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% else %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+	<tr>
+		<% for i in 3..5 %>
+			<td>
+				<% if @game.turn == session[:user_id] %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% else %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+	<tr>
+		<% for i in 6..8 %>
+			<td>
+				<% if @game.turn == session[:user_id] %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% else %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+</table>

@@ -30,12 +30,6 @@ class UsersController < ApplicationController
 	@friends = User.find_friends(params[:id])
 	@usersGames = GameLogic.find_users_games(params[:id])
 
-	@usersGames.each do |g|
-		print "Game\n"
-		print g.id
-		print "\n"
-	end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

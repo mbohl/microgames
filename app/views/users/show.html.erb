@@ -35,7 +35,7 @@
 	<% @usersGames.each do |g| %>
 		Game ID: <%= g.id %>
 		<% if g.turn == @user.id %>
-			<%= link_to "Your Turn!", "#" %>
+			<%= link_to "Your Turn!", show_game_path(g.id) %>
 		<% end %>
 	</br>
 	<% end %>

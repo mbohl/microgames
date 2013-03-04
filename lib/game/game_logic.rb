@@ -25,4 +25,41 @@ module GameLogic
 
 	end
 
+	def self.get_game_name(gametype)
+		if gametype == '1'
+			return 'Tic-Tac-Toe'
+		else
+			return 'Unknown Game'
+		end
+	end
+
+	def self.get_cell_owner(cell_state, turn, curUserId)
+		print "Cell state: \n"
+		print cell_state
+		print "\n"
+		if cell_state == '0'
+			if turn != curUserId
+				return "OPEN"
+			else
+				return 'Move Here'
+			end
+		elsif cell_state == '1'
+			return 'X'
+		elsif cell_state == '2'
+			return 'O'
+		end
+	end
+
+	def self.get_player_number(game_id, user_id)
+		print "GAME ID\n"
+		print game_id
+
+		print "USER_ID\n"
+		print user_id
+
+		player_number = GamesUser.find(:all,
+										:conditions => ["games_users.game_id = ? and games_users.user_id = ?", game_id, user_id],
+										:select => "games_users.player_number")
+	end
+
 end
