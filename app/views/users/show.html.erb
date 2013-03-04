@@ -32,11 +32,13 @@
 <p>
 	<b>Current Games</b>
 	</br>
+	<% index = 0 %>
 	<% @usersGames.each do |g| %>
 		Game ID: <%= g.id %>
-		<% if g.turn == @user.id %>
+		<% if @usersPlayerNumbers[g.id] == g.turn.to_s %>
 			<%= link_to "Your Turn!", show_game_path(g.id) %>
 		<% end %>
+		<% index = index + 1 %>
 	</br>
 	<% end %>
 	</br>

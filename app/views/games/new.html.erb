@@ -3,7 +3,7 @@
 <b>New Game Options</b>
 <%= form_for :game, :url => {:action => :create } do |f| %>
 	<%= f.label :game_type%>
-	<%= f.select :type, options_for_select([["Tic Tac Toe", "1"], ["The Shining", "2"]]), :placeholder=>"Required" %>
+	<%= f.select :gametype, options_for_select([["Tic Tac Toe", "1"], ["The Shining", "2"]]), :placeholder=>"Required" %>
 	</br></br>
 	<%= f.label :players%>
 	</br>

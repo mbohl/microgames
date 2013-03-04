@@ -2,12 +2,16 @@ module GameLogic
 
 	def self.create_games_users(player_ids, game_id)
 
+		#for now, player_numbers are sequential integers; later give user/system capability to specify turn order
+		curPN = 1
 		player_ids.each do |id|
 			games_user = GamesUser.new
 			games_user.game_id = game_id
+			games_user.player_number = curPN
 			curUser = User.find_by_id(id)
 			curUser.games_users.push(games_user)
 			curUser.save
+			curPN = curPN + 1
 		end
 	end
 
@@ -33,12 +37,10 @@ module GameLogic
 		end
 	end
 
-	def self.get_cell_owner(cell_state, turn, curUserId)
-		print "Cell state: \n"
-		print cell_state
-		print "\n"
+	def self.get_cell_owner(cell_state, game, curPN)
+
 		if cell_state == '0'
-			if turn != curUserId
+			if game.turn != curPN
 				return "OPEN"
 			else
 				return 'Move Here'

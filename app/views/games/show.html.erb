@@ -6,10 +6,10 @@
 	<tr>
 		<% for i in 0..2 %>
 			<td>
-				<% if @game.turn == session[:user_id] %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% if @game.turn == @curPN[0].player_number %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
 				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
 				<% end %>
 			</td>
 		<% end %>
@@ -17,10 +17,10 @@
 	<tr>
 		<% for i in 3..5 %>
 			<td>
-				<% if @game.turn == session[:user_id] %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% if @game.turn == @curPN[0].player_number %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
 				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
 				<% end %>
 			</td>
 		<% end %>
@@ -28,10 +28,10 @@
 	<tr>
 		<% for i in 6..8 %>
 			<td>
-				<% if @game.turn == session[:user_id] %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]), change_state_path(@game.id, i)%>
+				<% if @game.turn == @curPN[0].player_number %>
+					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
 				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game.turn, session[:user_id]) %>
+					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
 				<% end %>
 			</td>
 		<% end %>

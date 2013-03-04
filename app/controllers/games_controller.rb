@@ -14,9 +14,9 @@ class GamesController < ApplicationController
 		#Set entry vaues 
 		@game = Game.new
 		@game.gametype = 1
-		@game.turn = session[:user_id]
+		@game.turn = 1 #set turn to first player_number
 		@game.last_turn = Time.now
-		@game.state = '000000000'
+		@game.game_state = '000000000'
 
 		player_ids = Array.new
 		player_ids.push(session[:user_id])
@@ -47,6 +47,7 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find_by_id(params[:id])
+		@curPN = GameLogic.get_player_number(@game.id, session[:user_id])
 
 		respond_to do |format|
       		format.html # show.html.erb
@@ -60,21 +61,46 @@ class GamesController < ApplicationController
 
 		#switch turn
 		if @game.turn == 1
-			@game.turn = 2
+			@game.turn = 1
 		else
 			@game.turn = 1
 		end
 
+		@game.last_turn = Time.now
+
 		#update the appropriate index in the state variable
 		playerNumber = GameLogic.get_player_number(@game.id, session[:user_id])
 		curState = @game.game_state
-		curState[Integer(params[:state_index])] = playerNumber[0].player_number.to_s
 
-		#honestly, I have no f'ing idea why to_i works...should be a varchar string...see if bites in ass later
-		@game.game_state = curState.to_i
+		puts "OLD ENCODING"
+		puts curState.encoding
+
+		newState = String.new
+
+		print "NEW STATE:\n"
+		print newState
+		print "\n"
+		newState = curState
+
+		newState[2] = '1'
+
+		puts 'NEW ENCODING'
+		puts newState.encoding
+		@game.game_state[2] = '1'
+
+		puts "GAMESTATE:"
+		puts @game.game_state
 
 		#save the updated record
-		@game.save
+		if @game.save!
+			puts "SAVED!!!"
+		else
+			puts "NOT SAVED!!!"
+		end
+
+		#@game = Game.find(params[:game_id]).reload
+		puts "new game state?"
+		puts @game.game_state
 
 		redirect_to :action => "show", :id => @game.id
 	end
