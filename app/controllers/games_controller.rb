@@ -43,11 +43,19 @@ class GamesController < ApplicationController
 		    	format.json { render :json => @user.errors, :status => :unprocessable_entity }
 		  	end
 		end
+
 	end
 
 	def show
 		@game = Game.find_by_id(params[:id])
+
 		@curPN = GameLogic.get_player_number(@game.id, session[:user_id])
+
+		#get hash of cell_states (X, O, Empty)
+		@cellStates = Hash.new
+		for i in 0..8
+			@cellStates[i] = GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number)
+		end
 
 		respond_to do |format|
       		format.html # show.html.erb
@@ -56,7 +64,6 @@ class GamesController < ApplicationController
 	end
 
 	def change_state
-
 		@game = Game.find_by_id(params[:game_id])
 
 		#switch turn
@@ -74,13 +81,15 @@ class GamesController < ApplicationController
 		@game.game_state_will_change!
 		@game.game_state[Integer(params[:state_index])] = playerNumber[0].player_number.to_s
 
-		puts "GAMESTATE:"
-		puts @game.game_state
+		endcheck = GameLogic.check_endstate(@game.game_state, params[:state_index])
+
+		if endcheck > 0
+			@game.winner_will_change!
+			@game.winner = endcheck
+		end
 
 		#save updated object
 		@game.save
-
-
 		redirect_to :action => "show", :id => @game.id
 	end
 

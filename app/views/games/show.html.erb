@@ -1,39 +1,32 @@
 <h1><%= GameLogic.get_game_name(@game.gametype.to_s) + " " + "Session:" + @game.id.to_s %> </h1>
-
+<% if @game.winner.to_i >  0 %>
+	<h2> PLAYER <%= @game.winner %> HAS WON! </h2>
+	</br>
+	<%= link_to "Leave Game", home_path(session[:user_id]) %>
+<% end %>
 
 <!--For now, this is hardcoded for tic-tac-toe.  But we can put into partial templates that will render depending on value of @game.gametype.to_s when we have more games-->
 <table border='1'>
+	<% tr_start = [0, 3, 6] %>
+	<% tr_end = [2, 5, 8] %>
+	<% for i in 0..8 %>
+	<% if tr_start.include? i %>
 	<tr>
-		<% for i in 0..2 %>
+	<% end %>
 			<td>
-				<% if @game.turn == @curPN[0].player_number %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
+				<% if @cellStates[i] == 'X' or @cellStates[i] == 'O' %>
+					<%= @cellStates[i] %>
 				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
+					<% if @game.turn == @curPN[0].player_number %>
+						<%= link_to @cellStates[i], change_state_path(@game.id, i)%>
+					<% else %>
+						<%= @cellStates[i] %>
+
+					<% end %>
 				<% end %>
 			</td>
-		<% end %>
+	<% if tr_end.include? i %>
 	</tr>
-	<tr>
-		<% for i in 3..5 %>
-			<td>
-				<% if @game.turn == @curPN[0].player_number %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
-				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
-				<% end %>
-			</td>
-		<% end %>
-	</tr>
-	<tr>
-		<% for i in 6..8 %>
-			<td>
-				<% if @game.turn == @curPN[0].player_number %>
-					<%= link_to GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number), change_state_path(@game.id, i)%>
-				<% else %>
-					<%= GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number) %>
-				<% end %>
-			</td>
-		<% end %>
-	</tr>
+	<% end %>
+	<% end %>
 </table>
