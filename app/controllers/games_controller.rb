@@ -61,7 +61,7 @@ class GamesController < ApplicationController
 
 		#switch turn
 		if @game.turn == 1
-			@game.turn = 1
+			@game.turn = 2
 		else
 			@game.turn = 1
 		end
@@ -70,37 +70,16 @@ class GamesController < ApplicationController
 
 		#update the appropriate index in the state variable
 		playerNumber = GameLogic.get_player_number(@game.id, session[:user_id])
-		curState = @game.game_state
 
-		puts "OLD ENCODING"
-		puts curState.encoding
-
-		newState = String.new
-
-		print "NEW STATE:\n"
-		print newState
-		print "\n"
-		newState = curState
-
-		newState[2] = '1'
-
-		puts 'NEW ENCODING'
-		puts newState.encoding
-		@game.game_state[2] = '1'
+		@game.game_state_will_change!
+		@game.game_state[Integer(params[:state_index])] = playerNumber[0].player_number.to_s
 
 		puts "GAMESTATE:"
 		puts @game.game_state
 
-		#save the updated record
-		if @game.save!
-			puts "SAVED!!!"
-		else
-			puts "NOT SAVED!!!"
-		end
+		#save updated object
+		@game.save
 
-		#@game = Game.find(params[:game_id]).reload
-		puts "new game state?"
-		puts @game.game_state
 
 		redirect_to :action => "show", :id => @game.id
 	end
