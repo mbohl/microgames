@@ -67,17 +67,17 @@ module GameLogic
 	def self.check_endgame(game_state, updated_index)
 
 		n = 3
-		col = updated_index % 3
-		row = updated_index / 3
+		col = updated_index.to_i % 3
+		row = updated_index.to_i / 3
 
 		#horizontal check
 		if game_state[3 * row] == game_state[3 * row + 1] and game_state[3 * row + 1] == game_state[3 * row + 2]
 			return game_state[3 * row]
 		#vertical check
-		elsif game_state[col + 3] == game_state[col] and game_state[col] == game_satte[col + 6]
+		elsif game_state[col + 3] == game_state[col] and game_state[col] == game_state[col + 6]
 			return game_state[col]
 		#diagonal checks
-		elsif updated_index % 2 == 0
+		elsif updated_index.to_i % 2 == 0
 			if (game_state[0] == game_state[4] and game_state[4] == game_state[8]) or (game_state[2] == game_state[4] and game_state[4] == game_state[6])
 				return game_state[0]
 			end

@@ -81,9 +81,9 @@ class GamesController < ApplicationController
 		@game.game_state_will_change!
 		@game.game_state[Integer(params[:state_index])] = playerNumber[0].player_number.to_s
 
-		endcheck = GameLogic.check_endstate(@game.game_state, params[:state_index])
+		endcheck = GameLogic.check_endgame(@game.game_state, params[:state_index])
 
-		if endcheck > 0
+		if endcheck.to_i > 0
 			@game.winner_will_change!
 			@game.winner = endcheck
 		end
