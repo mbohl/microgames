@@ -1,46 +1,64 @@
-<p id="notice"><%= notice %></p>
-<h1><b>WELCOME TO YOUR HOME PAGE <%= @user.first_name %>!</b></h1>
-<b>Yes it's very boring for now...</b>
+<% if params[:id].to_i == session[:user_id].to_i %>
+	<p id="notice"><%= notice %></p>
+	<h1><b>WELCOME TO YOUR HOME PAGE <%= @user.first_name %>!</b></h1>
+	<b>Yes it's very boring for now...</b>
+	<p>
+		<%= link_to "Create Game", create_game_path %>
+		<%= link_to "View My Profile", viewprofile_path(@user.id) %>
 
-<p>
-  <b>First Name:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-	<b>Last Name</b>
-	<%= @user.last_name %>
-</p>
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-	<%= link_to "Create Game", create_game_path %>
-
-<p>
-	<b>Friends</b>
-	</br>
-	<!--this is all users for now...set up friends lists relationships later-->
-	<% @friends.each do |friend| %>
-		<%= friend.first_name + " " + friend.last_name + " "%>
-		<br>
-	<% end %>
-</p>
-
-<p>
-	<b>Current Games</b>
-	</br>
-	<% index = 0 %>
-	<% @usersGames.each do |g| %>
-		Game ID: <%= link_to g.id, show_game_path(g.id) %>
-		<% if @usersPlayerNumbers[g.id] == g.turn.to_s and g.winner == '0'%>
-			(Your Turn!)
-		<% elsif g.winner > '0' %>
-			(Game Ended)
+	<p>
+		<b>Friends</b>
+		</br>
+		<!--this is all users for now...set up friends lists relationships later-->
+		<% @friends.each do |friend| %>
+			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id) %>
+			<br>
 		<% end %>
-		<% index = index + 1 %>
-	</br>
-	<% end %>
-	</br>
+	</p>
+
+	<p>
+		<b>Current Games</b>
+		</br>
+		<% index = 0 %>
+		<% @usersGames.each do |g| %>
+			<% if g.winner.to_i == 0 %>
+				Game ID: <%= link_to g.id, show_game_path(g.id) %>
+				<% if @usersPlayerNumbers[g.id] == g.turn.to_s and g.winner.to_i == 0%>
+					(Your Turn!)
+				<% end %>
+			</br>
+			<% end %>
+			<% index = index + 1 %>
+		<% end %>
+		</br>
+<% else %>
+	<p id="notice"><%= notice %></p>
+	<h1><b><%= @user.first_name %>'s Page</b></h1>
+	<p>
+		<%= link_to "View Profile", viewprofile_path(@user.id) %>
+	<p>
+		<b>Friends</b>
+		</br>
+		<!--this is all users for now...set up friends lists relationships later-->
+		<% @friends.each do |friend| %>
+			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id) %>
+			<br>
+		<% end %>
+	</p>
+
+	<p>
+		<b>Current Games</b>
+		</br>
+		<% index = 0 %>
+		<% @usersGames.each do |g| %>
+			<% if g.winner.to_i == 0 %>
+				Game ID: <%= link_to g.id, show_game_path(g.id) %>
+				<% if @usersPlayerNumbers[g.id] == g.turn.to_s and g.winner.to_i == 0%>
+					(Your Turn!)
+				<% end %>
+			</br>
+			<% end %>
+			<% index = index + 1 %>
+		<% end %>
+		</br>
+<% end %>

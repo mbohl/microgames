@@ -16,13 +16,13 @@ module TicLogic
 		playerNumber = GameLogic.get_player_number(@game.id, user_id)
 
 		@game.game_state_will_change!
-		@game.game_state[Integer(state_index)] = playerNumber[0].player_number.to_s
+		@game.game_state[Integer(state_index)] = playerNumber
 
 		endcheck = check_endgame(@game.game_state, state_index)
 
 		if endcheck.to_i > 0
 			@game.winner_will_change!
-			@game.winner = endcheck
+			@game.winner = GameLogic.get_user_from_player_number(@game.id, endcheck)
 		end
 
 		puts "SAVING!!!!!!!!!!!!"

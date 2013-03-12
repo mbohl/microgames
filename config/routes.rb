@@ -57,6 +57,7 @@ Microgames::Application.routes.draw do
    #USER PATHS
    match "/signup",  :to => "users#new"
    match "/users/:id", :to => "users#show", :as => :showuser
+   match "/users/:id/profile", :to => "users#view_profile", :as => :viewprofile
 
    #GAME PATHS
    match "/creategame", :to => "games#new", :as => :create_game

@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
 		@usersGames.each do |ug|
 			temp = GameLogic.get_player_number(ug.id, params[:id])
-			@usersPlayerNumbers[ug.id] = temp[0].player_number.to_s
+			@usersPlayerNumbers[ug.id] = temp
 		end
 
 
@@ -41,6 +41,31 @@ class UsersController < ApplicationController
 	      format.html # show.html.erb
 	      format.json { render :json => @user }
 	    end
-  end
+  	end
+
+  	def view_profile
+  		@user = User.find(params[:id])
+  		@games = GameLogic.find_ended_games(params[:id])
+
+  		@numwins = 0
+  		@numlosses = 0
+  		@numdraws = 0
+
+  		@games.each do |g|
+  			if g.winner.to_i == @user.id.to_i
+  				@numwins = @numwins + 1
+  			elsif g.winner.to_i < 3
+  				@numlosses = @numlosses + 1
+  			else
+  				@numdraws = @numdraws + 1
+  			end
+  		end
+
+  		respond_to do |format|
+	      format.html 
+	      format.json { render :json => @user }
+	    end
+
+  	end
 
 end

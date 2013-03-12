@@ -17,7 +17,7 @@
 				<% if @cellStates[i] == 'X' or @cellStates[i] == 'O' %>
 					<%= @cellStates[i] %>
 				<% else %>
-					<% if @game.turn == @curPN[0].player_number %>
+					<% if @game.turn == @curPN.to_i %>
 						<%= link_to @cellStates[i], change_state_path(@game.id, i)%>
 					<% else %>
 						<%= @cellStates[i] %>

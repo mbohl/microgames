@@ -26,6 +26,19 @@ module GameLogic
 		end
 
 		return games
+	end
+
+	def self.find_ended_games(user_id)
+		user = User.find_by_id(user_id)
+		games = Array.new
+
+		user.games.each do |g|
+			if g.winner.to_i > 0
+				games.push(g)
+			end
+		end
+
+		return games
 
 	end
 
@@ -37,16 +50,22 @@ module GameLogic
 		end
 	end
 
+	#returns player number for given user id in game denoted by game_id
 	def self.get_player_number(game_id, user_id)
-		print "GAME ID\n"
-		print game_id
-
-		print "USER_ID\n"
-		print user_id
-
 		player_number = GamesUser.find(:all,
 										:conditions => ["games_users.game_id = ? and games_users.user_id = ?", game_id, user_id],
 										:select => "games_users.player_number")
+
+		return player_number[0].player_number.to_s
+	end
+
+	def self.get_user_from_player_number(game_id, player_number)
+		user_id = GamesUser.find(:all,
+								 :conditions => ["games_users.game_id = ? and games_users.player_number = ?", game_id, player_number],
+								 :select => "games_users.user_id")
+
+		return user_id[0].user_id.to_s
+
 	end
 
 	

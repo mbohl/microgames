@@ -54,7 +54,7 @@ class GamesController < ApplicationController
 		#get hash of cell_states (X, O, Empty)
 		@cellStates = Hash.new
 		for i in 0..8
-			@cellStates[i] = TicLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number)
+			@cellStates[i] = TicLogic.get_cell_owner(@game.game_state[i], @game, @curPN.to_i)
 		end
 
 		respond_to do |format|
