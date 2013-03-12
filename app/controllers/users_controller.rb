@@ -32,10 +32,9 @@ class UsersController < ApplicationController
 
 		@usersGames.each do |ug|
 			temp = GameLogic.get_player_number(ug.id, params[:id])
-			print "TEMP\n"
-			print temp[0].player_number.to_s
 			@usersPlayerNumbers[ug.id] = temp[0].player_number.to_s
 		end
+
 
 	    respond_to do |format|
 	      format.html # show.html.erb
