@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
+
 		@user = User.find(params[:id])
 		@friends = User.find_friends(params[:id])
 		@usersGames = GameLogic.find_users_games(params[:id])

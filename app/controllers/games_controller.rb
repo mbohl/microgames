@@ -54,7 +54,7 @@ class GamesController < ApplicationController
 		#get hash of cell_states (X, O, Empty)
 		@cellStates = Hash.new
 		for i in 0..8
-			@cellStates[i] = GameLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number)
+			@cellStates[i] = TicLogic.get_cell_owner(@game.game_state[i], @game, @curPN[0].player_number)
 		end
 
 		respond_to do |format|
@@ -64,33 +64,14 @@ class GamesController < ApplicationController
 	end
 
 	def change_state
-		@game = Game.find_by_id(params[:game_id])
+		
+		game = Game.find_by_id(params[:game_id])
 
-		#switch turn
-		if @game.turn == 1
-			@game.turn = 2
-		else
-			@game.turn = 1
+		if(game.gametype == 1)
+			game = TicLogic.change_state(params[:state_index], params[:game_id], session[:user_id])
 		end
 
-		@game.last_turn = Time.now
-
-		#update the appropriate index in the state variable
-		playerNumber = GameLogic.get_player_number(@game.id, session[:user_id])
-
-		@game.game_state_will_change!
-		@game.game_state[Integer(params[:state_index])] = playerNumber[0].player_number.to_s
-
-		endcheck = GameLogic.check_endgame(@game.game_state, params[:state_index])
-
-		if endcheck.to_i > 0
-			@game.winner_will_change!
-			@game.winner = endcheck
-		end
-
-		#save updated object
-		@game.save
-		redirect_to :action => "show", :id => @game.id
+		redirect_to :action => "show", :id => game.id
 	end
 
 end

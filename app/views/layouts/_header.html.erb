@@ -1,3 +1,3 @@
 <div id="header">
-	<%= link_to "Home", home_path(session[:user_id]) %> 
+	<% if session[:user_id] != nil %> <%= link_to "Home", showuser_path(session[:user_id]) %> <% else %> <%= link_to "Home", signin_path %> <% end %>  <%= link_to "Sign Out", signout_path %>
 </div>

@@ -37,21 +37,6 @@ module GameLogic
 		end
 	end
 
-	def self.get_cell_owner(cell_state, game, curPN)
-
-		if cell_state == '0'
-			if game.turn != curPN
-				return "OPEN"
-			else
-				return 'Move Here'
-			end
-		elsif cell_state == '1'
-			return 'X'
-		elsif cell_state == '2'
-			return 'O'
-		end
-	end
-
 	def self.get_player_number(game_id, user_id)
 		print "GAME ID\n"
 		print game_id
@@ -64,27 +49,6 @@ module GameLogic
 										:select => "games_users.player_number")
 	end
 
-	def self.check_endgame(game_state, updated_index)
-
-		n = 3
-		col = updated_index.to_i % 3
-		row = updated_index.to_i / 3
-
-		#horizontal check
-		if game_state[3 * row] == game_state[3 * row + 1] and game_state[3 * row + 1] == game_state[3 * row + 2]
-			return game_state[3 * row]
-		#vertical check
-		elsif game_state[col + 3] == game_state[col] and game_state[col] == game_state[col + 6]
-			return game_state[col]
-		#diagonal checks
-		elsif updated_index.to_i % 2 == 0
-			if (game_state[0] == game_state[4] and game_state[4] == game_state[8]) or (game_state[2] == game_state[4] and game_state[4] == game_state[6])
-				return game_state[0]
-			end
-		end
-
-		return 0
-
-	end
+	
 
 end

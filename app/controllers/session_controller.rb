@@ -2,6 +2,7 @@
 class SessionController < ApplicationController
 
 	def new
+		render 'session/new'
 	end
 
 	def create
@@ -22,7 +23,10 @@ class SessionController < ApplicationController
 
 	def destroy
 		session[:user_id] = nil
-		redirect_to "/"
+		puts "--------------------------------------------------------"
+		puts "SESSION ID"
+		puts session[:user_id]
+		redirect_to signin_path
 	end
 
 end

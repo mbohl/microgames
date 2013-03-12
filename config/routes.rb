@@ -50,12 +50,13 @@ Microgames::Application.routes.draw do
   # just remember to delete public/index.html.
 
   #SESSION PATHS
-   root :to => 'session#new'
+   match "/", :to => 'session#new', :as => :signin
    post "/sessions", :to => "session#create"
+   match "/destroysession", :to => "session#destroy", :as => :signout
 
    #USER PATHS
    match "/signup",  :to => "users#new"
-   match "/users/:id", :to => "users#show", :as => :home
+   match "/users/:id", :to => "users#show", :as => :showuser
 
    #GAME PATHS
    match "/creategame", :to => "games#new", :as => :create_game
