@@ -53,9 +53,6 @@
 		<% @usersGames.each do |g| %>
 			<% if g.winner.to_i == 0 %>
 				Game ID: <%= link_to g.id, show_game_path(g.id) %>
-				<% if @usersPlayerNumbers[g.id] == g.turn.to_s and g.winner.to_i == 0%>
-					(Your Turn!)
-				<% end %>
 			</br>
 			<% end %>
 			<% index = index + 1 %>
