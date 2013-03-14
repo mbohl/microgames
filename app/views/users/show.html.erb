@@ -34,13 +34,13 @@
 	<p id="notice"><%= notice %></p>
 	<h1><b><%= @user.first_name %>'s Page</b></h1>
 	<p>
-		<%= link_to "View Profile", viewprofile_path(@user.id) %>
+		<%= link_to "View Profile", viewprofile_path(@user.id), {:class => "mglink"} %>
 	<p>
 		<b>Friends</b>
 		</br>
 		<!--this is all users for now...set up friends lists relationships later-->
 		<% @friends.each do |friend| %>
-			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id) %>
+			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id), {:class => "mglink"}  %>
 			<br>
 		<% end %>
 	</p>
@@ -51,7 +51,7 @@
 		<% index = 0 %>
 		<% @usersGames.each do |g| %>
 			<% if g.winner.to_i == 0 %>
-				Game ID: <%= link_to g.id, show_game_path(g.id) %>
+				Game ID: <%= link_to g.id, show_game_path(g.id), {:class => "mglink"} %>
 			</br>
 			<% end %>
 			<% index = index + 1 %>
