@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   	def view_profile
   		@user = User.find(params[:id])
   		@games = GameLogic.find_ended_games(params[:id])
-
   		@numwins = 0
   		@numlosses = 0
   		@numdraws = 0
@@ -54,10 +53,8 @@ class UsersController < ApplicationController
   		@games.each do |g|
   			if g.winner.to_i == @user.id.to_i
   				@numwins = @numwins + 1
-  			elsif g.winner.to_i < 3
-  				@numlosses = @numlosses + 1
   			else
-  				@numdraws = @numdraws + 1
+  				@numlosses = @numlosses + 1
   			end
   		end
 
