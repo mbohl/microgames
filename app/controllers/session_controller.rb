@@ -9,7 +9,7 @@ class SessionController < ApplicationController
 		user = User.find_by_email(params[:session][:email])
 		if user && user.password == params[:session][:password] 
 			session[:user_id] = user.id
-			redirect_to home_path(session[:user_id])
+			redirect_to showuser_path(session[:user_id])
 		else
 			flash.now[:error] = 'Invalid login information'
 			redirect_to "/"
