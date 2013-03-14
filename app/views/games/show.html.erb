@@ -1,4 +1,4 @@
-<h1><%= GameLogic.get_game_name(@game.gametype.to_s) + " " + "Session:" + @game.id.to_s %> </h1>
+<div align="center"><h1><%= GameLogic.get_game_name(@game.gametype.to_s) + " " + "Session:" + @game.id.to_s %> </h1></div>
 <% if @game.winner.to_i >  0 %>
 	<h2> PLAYER <%= @game.winner %> HAS WON! </h2>
 	</br>
@@ -6,14 +6,14 @@
 <% end %>
 
 <!--For now, this is hardcoded for tic-tac-toe.  But we can put into partial templates that will render depending on value of @game.gametype.to_s when we have more games-->
-<table border='1'>
+<table align="center" border='1'>
 	<% tr_start = [0, 3, 6] %>
 	<% tr_end = [2, 5, 8] %>
 	<% for i in 0..8 %>
 	<% if tr_start.include? i %>
 	<tr>
 	<% end %>
-			<td>
+			<td width=50 height=50 align="center">
 				<% if @cellStates[i] == 'X' or @cellStates[i] == 'O' %>
 					<%= @cellStates[i] %>
 				<% else %>
