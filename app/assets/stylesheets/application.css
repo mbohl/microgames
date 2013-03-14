@@ -26,3 +26,18 @@
 	color: #088A08;
 	text-decoration: none;
 }
+
+.tttgrid:link {
+	color: #DF0101;
+	text-decoration: none;
+}
+
+.tttgrid:visited {
+	color: #DF0101;
+	text-decoration: none;
+}
+
+.tttgrid:hover {
+	color: #000000;
+	text-decoration: none;
+}

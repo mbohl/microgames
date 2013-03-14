@@ -18,10 +18,9 @@
 					<%= @cellStates[i] %>
 				<% else %>
 					<% if @game.turn == @curPN.to_i %>
-						<%= link_to @cellStates[i], change_state_path(@game.id, i)%>
+						<%= link_to @cellStates[i], change_state_path(@game.id, i), {:class => "tttgrid"}%>
 					<% else %>
 						<%= @cellStates[i] %>
-
 					<% end %>
 				<% end %>
 			</td>
