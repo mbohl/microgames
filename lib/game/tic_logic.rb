@@ -54,15 +54,15 @@ module TicLogic
 		row = updated_index.to_i / 3
 
 		#horizontal check
-		if game_state[3 * row] == game_state[3 * row + 1] and game_state[3 * row + 1] == game_state[3 * row + 2]
-			return game_state[3 * row]
+		if game_state.split('')[3 * row] == game_state.split('')[3 * row + 1] and game_state.split('')[3 * row + 1] == game_state.split('')[3 * row + 2]
+			return game_state.split('')[3 * row]
 		#vertical check
-		elsif game_state[col + 3] == game_state[col] and game_state[col] == game_state[col + 6]
-			return game_state[col]
+		elsif game_state.split('')[col + 3] == game_state.split('')[col] and game_state.split('')[col] == game_state.split('')[col + 6]
+			return game_state.split('')[col]
 		#diagonal checks
 		elsif updated_index.to_i % 2 == 0
-			if (game_state[0] == game_state[4] and game_state[4] == game_state[8]) or (game_state[2] == game_state[4] and game_state[4] == game_state[6])
-				return game_state[0]
+			if (game_state.split('')[0] == game_state.split('')[4] and game_state.split('')[4] == game_state.split('')[8]) or (game_state.split('')[2] == game_state.split('')[4] and game_state.split('')[4] == game_state.split('')[6])
+				return game_state.split('')[0]
 			end
 		end
 
