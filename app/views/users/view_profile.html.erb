@@ -1,5 +1,5 @@
 <h1>Gamer Profile</h1>
-<p><%= @user.first_name %> <%= @user.last_name %></p>
+<p><b><%= @user.first_name %> <%= @user.last_name %></b></p>
 <p>
 	<div>W/L/D: <%= @numwins %>:<%= @numlosses %>:<%= @numdraws %></div>
 </p>
@@ -12,7 +12,7 @@
 	<% @games.each do |g| %>
 		<tr>
 			<td><%= g.id %></td>
-			<td><% if g.winner.to_i == @user.id.to_i %>Won<% else %>Lost<% end %></td>
+			<td><% if g.winner.to_i == @user.id.to_i %><font color="green">Won</font><% else %><font color="red">Lost</font><% end %></td>
 			<td><%= g.last_turn %></td>
 		</tr>
 	<% end %>

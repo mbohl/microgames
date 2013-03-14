@@ -11,3 +11,18 @@
  *= require_self
  *= require_tree .
  */
+
+.mglink:link {
+	color: #0174DF;
+	text-decoration: none;
+}
+
+.mglink:visited{
+	color: #0174DF;
+	text-decoration: none;
+}
+
+.mglink:hover{
+	color: #088A08;
+	text-decoration: none;
+}

@@ -1,6 +1,6 @@
 <div align="center"><h1><%= GameLogic.get_game_name(@game.gametype.to_s) + " " + "Session:" + @game.id.to_s %> </h1></div>
 <% if @game.winner.to_i >  0 %>
-	<h2> PLAYER <%= @game.winner %> HAS WON! </h2>
+	<h2><font color="red" PLAYER <%= @game.winner %> has won!</font></h2>
 	</br>
 	<%= link_to "Leave Game", showuser_path(session[:user_id]) %>
 <% end %>

@@ -1,17 +1,16 @@
 <% if params[:id].to_i == session[:user_id].to_i %>
 	<p id="notice"><%= notice %></p>
 	<h1><b>WELCOME TO YOUR HOME PAGE <%= @user.first_name %>!</b></h1>
-	<b>Yes it's very boring for now...</b>
 	<p>
-		<%= link_to "Create Game", create_game_path %>
-		<%= link_to "View My Profile", viewprofile_path(@user.id) %>
+		<%= link_to "Create Game", create_game_path, {:class => "mglink"} %>
+		<%= link_to "View My Profile", viewprofile_path(@user.id), {:class => "mglink"} %>
 
 	<p>
 		<b>Friends</b>
 		</br>
 		<!--this is all users for now...set up friends lists relationships later-->
 		<% @friends.each do |friend| %>
-			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id) %>
+			<%= link_to friend.first_name + " " + friend.last_name, showuser_path(friend.id), {:class => "mglink"} %>
 			<br>
 		<% end %>
 	</p>
@@ -22,9 +21,9 @@
 		<% index = 0 %>
 		<% @usersGames.each do |g| %>
 			<% if g.winner.to_i == 0 %>
-				Game ID: <%= link_to g.id, show_game_path(g.id) %>
+				Game ID: <%= link_to g.id, show_game_path(g.id), {:class => "mglink"} %>
 				<% if @usersPlayerNumbers[g.id] == g.turn.to_s and g.winner.to_i == 0%>
-					(Your Turn!)
+					<font color="green">(Your Turn!)</font>
 				<% end %>
 			</br>
 			<% end %>
