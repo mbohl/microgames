@@ -36,7 +36,7 @@ class GamesController < ApplicationController
 
 		respond_to do |format|
 			if @game.id
-		    	format.html { redirect_to home_path(session[:user_id]), :notice => 'Game was successfully created.' }
+		    	format.html { redirect_to showuser_path(session[:user_id]), :notice => 'Game was successfully created.' }
 		    	format.json { render :json => @game, :status => :created}
 		  	else
 		    	format.html { render :action => "new" }

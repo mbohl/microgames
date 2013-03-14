@@ -2,7 +2,7 @@
 <% if @game.winner.to_i >  0 %>
 	<h2> PLAYER <%= @game.winner %> HAS WON! </h2>
 	</br>
-	<%= link_to "Leave Game", home_path(session[:user_id]) %>
+	<%= link_to "Leave Game", showuser_path(session[:user_id]) %>
 <% end %>
 
 <!--For now, this is hardcoded for tic-tac-toe.  But we can put into partial templates that will render depending on value of @game.gametype.to_s when we have more games-->
